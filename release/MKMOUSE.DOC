@@ -1,0 +1,22 @@
+                         Mouse Maker
+
+     Ce logiciel vous permet de cr‚er de nouvelles souris en  mode 
+graphique.  Les  fichiers  g‚n‚r‚s  sont  d'extension  .MOU  (pour 
+Mouse). L'editeur fonctionne sur cartes EGA, VGA et autres ‚mulant
+le mode vid‚o 11 (graphique 320*200 16 couleurs).
+
+     Voici leur organisation: (en mots = 2 octets)
+          0..15     mask
+          16..31    fond
+          32        action X
+          33        action Y
+     Total: 34 mots (= 64 octets).
+
+     Pour  utiliser  ces  souris,  usez  de   l'interruption   33h 
+(fonction 09h):
+          mov al, 09h
+          mov bx, action_x
+          mov cx, action_y
+          mov dx, offset mask ; followed by form
+          int 33h
+
